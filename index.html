@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encrypt & decrypt text online | Secret Message | Encrypter.site</title>
+    <meta name="description"
+        content="Free online tool to encrypt and decrypt text with a password, directly in your browser. Uses modern client-side encryption and optional QR codes so you can share encrypted text without uploading your data.">
+    <link rel="canonical" href="https://www.encrypter.site/">
+    <meta property="og:title" content="Encrypt & decrypt text online | Encrypter.site">
+    <meta property="og:description"
+        content="Free online tool to encrypt and decrypt text with a password, directly in your browser. Uses modern client-side encryption and optional QR codes so you can share encrypted text without uploading your data.">
+    <meta property="og:url" content="https://www.encrypter.site/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Encrypter.site">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Encrypt & decrypt text online">
+    <meta name="twitter:description"
+        content="Encrypt and decrypt text online with a password. Free client-side text encrypter with optional QR code support.">
+
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3MCTDXDGRP"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-3MCTDXDGRP');
+    </script>
+    <link rel="icon" type="image/svg+xml" href="logo-lock.svg">
+</head>
+
+<body>
+
+    <div class="container">
+        <nav class="top-nav">
+            <div class="nav-brand">
+                <a href="/" class="site-logo-nav" aria-label="Encryptor home">
+                    <img src="logo-lock.svg" alt="Encryptor lock logo">
+                </a>
+                <div class="site-name">Encrypter</div>
+            </div>
+            <div class="nav-tabs">
+                <button id="tab-encrypt" class="nav-tab active">Encrypt</button>
+                <button id="tab-decrypt" class="nav-tab">Decrypt</button>
+            </div>
+        </nav>
+        <header class="site-header">
+            <h1>Encrypt & decrypt text online</h1>
+            <p class="subtitle">A free, browser-based text encrypter and decryptor. Paste your text, choose a password,
+                and encrypt or decrypt everything locally in your browser — with optional QR codes / Links for easy
+                sharing.</p>
+        </header>
+
+        <div id="unsupported-warning">
+            <strong>Warning:</strong> Your browser does not support the Web Crypto API. Please use a modern browser like
+            Chrome, Firefox, Safari, or Edge.
+        </div>
+
+        <!-- Encrypt View -->
+        <section id="view-encrypt" class="view-section">
+            <div class="section">
+                <div class="top-actions">
+                    <button id="btn-clear-encrypt" class="btn-clear-screen">
+                        <svg class="icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                        </svg>
+                        Clear Screen
+                    </button>
+                </div>
+                <label for="encrypt-input">Input</label>
+                <textarea id="encrypt-input" placeholder="Type or paste the text you want to encrypt"></textarea>
+            </div>
+
+            <div class="section">
+                <label for="encrypt-password">Password</label>
+                <div class="password-container">
+                    <input type="password" id="encrypt-password" placeholder="Enter a password">
+                    <button type="button" class="password-toggle" aria-label="Toggle password visibility">
+                        <svg class="icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M12 5c4.478 0 8.268 2.943 9.542 7-.45 1.434-1.256 2.71-2.31 3.76l1.436 1.436C21.93 15.797 22.99 14.015 23.542 12c-1.274-4.057-5.064-7-9.542-7-1.39 0-2.71.284-3.926.802l1.63 1.63A9.91 9.91 0 0112 5zM3.707 3.293L2.293 4.707l2.53 2.53C3.25 8.52 2.31 10.18 2.042 12c1.274 4.057 5.064 7 9.542 7 1.95 0 3.79-.55 5.37-1.51l2.34 2.34 1.414-1.414L3.707 3.293zm4.13 4.13l2.256 2.256A3.004 3.004 0 0012 15a3.004 3.004 0 005.293-1.707l2.22 2.22A7.96 7.96 0 0112 17c-3.66 0-6.81-2.32-7.96-5.63.5-1.44 1.45-2.67 2.66-3.57z" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <button class="advanced-toggle" id="advanced-toggle-encrypt">Show Advanced Options</button>
+            <div class="advanced-options" id="advanced-options-encrypt">
+                <div class="advanced-group">
+                    <label for="iterations-encrypt" class="label-compact">PBKDF2 Iterations:</label>
+                    <input type="number" id="iterations-encrypt" value="100000" min="10000" step="1000">
+                </div>
+                <p class="advanced-help">
+                    Higher iterations increase security against brute-force attacks but take longer to process.
+                </p>
+            </div>
+
+            <div class="controls">
+                <button id="btn-encrypt" class="btn-encrypt">Encrypt</button>
+            </div>
+
+            <div class="section output-container">
+                <label for="encrypt-output">Output</label>
+                <textarea id="encrypt-output" readonly placeholder="Result will appear here..."></textarea>
+                <div class="column-stack">
+                    <div class="output-actions">
+                        <button id="btn-copy-encrypt" class="output-action-button primary-copy">
+                            <svg class="icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z">
+                                </path>
+                            </svg>
+                            Copy Output
+                        </button>
+                        <button id="btn-generate-qr" class="output-action-button secondary-qrcode">
+                            Generate QR Code
+                        </button>
+                        <button id="btn-copy-link" class="output-action-button secondary-link">
+                            <svg class="icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                            Copy Link
+                        </button>
+                    </div>
+                    <div id="status-msg-encrypt" class="status-message"></div>
+                </div>
+                <div id="qr-section">
+                    <div id="qr-code-container"></div>
+                    <div class="qr-meta">
+                        <button id="btn-download-qr" class="output-action-button">Download QR as PNG</button>
+                        <span class="qr-or">or</span>
+                        <p class="help-text help-text-tight">Scan this to decrypt on another device.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Decrypt View -->
+        <section id="view-decrypt" class="view-section" style="display: none;">
+            <div class="section">
+                <div class="top-actions">
+                    <button id="btn-clear-decrypt" class="btn-clear-screen">
+                        <svg class="icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                        </svg>
+                        Clear Screen
+                    </button>
+                    <button id="openQrModeButton" class="qr-entry-button">
+                        <svg class="icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z">
+                            </path>
+                        </svg>
+                        Use QR code instead »
+                    </button>
+                </div>
+                <label for="decrypt-input">Ciphertext</label>
+                <textarea id="decrypt-input" placeholder="Paste encrypted text here"></textarea>
+                <div id="url-notice" class="url-notice" style="display: none;">
+                    Ciphertext pre-filled from link.
+                </div>
+            </div>
+
+            <div class="section">
+                <label for="decrypt-password">Password</label>
+                <div class="password-container">
+                    <input type="password" id="decrypt-password" placeholder="Enter a password">
+                    <button type="button" class="password-toggle" aria-label="Toggle password visibility">
+                        <svg class="icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M12 5c4.478 0 8.268 2.943 9.542 7-.45 1.434-1.256 2.71-2.31 3.76l1.436 1.436C21.93 15.797 22.99 14.015 23.542 12c-1.274-4.057-5.064-7-9.542-7-1.39 0-2.71.284-3.926.802l1.63 1.63A9.91 9.91 0 0112 5zM3.707 3.293L2.293 4.707l2.53 2.53C3.25 8.52 2.31 10.18 2.042 12c1.274 4.057 5.064 7 9.542 7 1.95 0 3.79-.55 5.37-1.51l2.34 2.34 1.414-1.414L3.707 3.293zm4.13 4.13l2.256 2.256A3.004 3.004 0 0012 15a3.004 3.004 0 005.293-1.707l2.22 2.22A7.96 7.96 0 0112 17c-3.66 0-6.81-2.32-7.96-5.63.5-1.44 1.45-2.67 2.66-3.57z" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Hidden advanced options for decrypt (iterations are usually in payload, but good to have just in case) -->
+            <button class="advanced-toggle" id="advanced-toggle-decrypt">Show Advanced Options</button>
+            <div class="advanced-options" id="advanced-options-decrypt">
+                <div class="advanced-group">
+                    <label for="iterations-decrypt" class="label-compact">PBKDF2 Iterations:</label>
+                    <input type="number" id="iterations-decrypt" value="100000" min="10000" step="1000">
+                </div>
+                <p class="advanced-help">
+                    Usually auto-detected from ciphertext.
+                </p>
+            </div>
+
+            <div class="controls">
+                <button id="btn-decrypt" class="btn-decrypt">Decrypt</button>
+            </div>
+
+            <div class="section output-container">
+                <label for="decrypt-output">Decrypted Text</label>
+                <textarea id="decrypt-output" readonly placeholder="Result will appear here..."></textarea>
+                <div class="column-stack">
+                    <div class="output-actions">
+                        <button id="btn-copy-decrypt" class="output-action-button primary-copy">
+                            <svg class="icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z">
+                                </path>
+                            </svg>
+                            Copy Output
+                        </button>
+                    </div>
+                    <div id="status-msg-decrypt" class="status-message"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- QR Decrypt Mode -->
+        <section id="qrMode">
+            <button id="backToTextModeButton" class="back-btn">
+                <svg class="icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                </svg>
+                Back to text mode
+            </button>
+
+            <h2 class="qr-title">Decrypt from QR Code</h2>
+            <div class="section">
+                <div class="qr-select-card">
+                    <input type="file" id="qr-input-file" accept="image/*">
+
+                    <!-- 1. Large Centered Button -->
+                    <button id="qrSelectButton" class="qr-choose-button">
+                        <svg class="icon icon-20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
+                            </path>
+                        </svg>
+                        Upload QR Image
+                    </button>
+
+                    <!-- 2. File Info Pill -->
+                    <div class="qr-file-info-container">
+                        <span id="qrFileName" class="qr-file-name-pill">No file selected</span>
+                    </div>
+
+                    <!-- 3. Status Text -->
+                    <div id="qrStatusMessage" class="qr-status-text">
+                        No image selected yet. Images are processed locally in your browser.
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <label for="qrCiphertext">Ciphertext from QR Code</label>
+                <textarea id="qrCiphertext" readonly placeholder="Ciphertext will appear here after scanning..."
+                    class="textarea-subtle"></textarea>
+            </div>
+
+            <div class="input-row">
+                <div class="input-group">
+                    <label for="qrPassword">Password</label>
+                    <div class="password-container">
+                        <input type="password" id="qrPassword" placeholder="Enter the password">
+                        <button type="button" class="password-toggle" aria-label="Toggle password visibility">
+                            <svg class="icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M12 5c4.478 0 8.268 2.943 9.542 7-.45 1.434-1.256 2.71-2.31 3.76l1.436 1.436C21.93 15.797 22.99 14.015 23.542 12c-1.274-4.057-5.064-7-9.542-7-1.39 0-2.71.284-3.926.802l1.63 1.63A9.91 9.91 0 0112 5zM3.707 3.293L2.293 4.707l2.53 2.53C3.25 8.52 2.31 10.18 2.042 12c1.274 4.057 5.064 7 9.542 7 1.95 0 3.79-.55 5.37-1.51l2.34 2.34 1.414-1.414L3.707 3.293zm4.13 4.13l2.256 2.256A3.004 3.004 0 0012 15a3.004 3.004 0 005.293-1.707l2.22 2.22A7.96 7.96 0 0112 17c-3.66 0-6.81-2.32-7.96-5.63.5-1.44 1.45-2.67 2.66-3.57z" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label for="qrIterations">PBKDF2 Iterations</label>
+                    <input type="number" id="qrIterationsInput" value="100000" min="10000" step="1000">
+                </div>
+            </div>
+            <p class="help-text">
+                Iterations must match the value used during encryption. We'll auto-fill this if the QR code includes it.
+            </p>
+
+            <div class="controls">
+                <button id="qrDecryptButton" class="btn-decrypt btn-qr-decrypt">Decrypt</button>
+            </div>
+
+            <div class="section output-container">
+                <label for="qrPlaintextOutput">Decrypted Text</label>
+                <textarea id="qrPlaintextOutput" readonly placeholder="Decrypted text will appear here..."></textarea>
+                <div class="output-actions" style="margin-top: 0.5rem;">
+                    <button id="btn-copy-qr" class="output-action-button primary-copy">
+                        <svg class="icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z">
+                            </path>
+                        </svg>
+                        Copy Output
+                    </button>
+                </div>
+            </div>
+
+            <p class="qr-footnote">
+                QR code images are processed locally in your browser. We do not upload your images or texts to any
+                server.
+            </p>
+        </section>
+
+        <div class="info-section">
+            <h2>Use cases: when to encrypt and decrypt text online</h2>
+            <ul>
+                <li><strong>Share Wi-Fi passwords or login details more safely.</strong> Encrypt the text with a
+                    password, send the encrypted string or QR code, and share the password via a different channel.</li>
+                <li><strong>Send a secret message to a friend or partner.</strong> Encrypt the message online and let
+                    them decrypt it later with the password you agreed on.</li>
+                <li><strong>Store private notes in ordinary apps.</strong> Keep a short note or reminder encrypted and
+                    paste the ciphertext into email, chat, or a notes app.</li>
+                <li><strong>Pass API tokens or config snippets temporarily.</strong> For small secrets you need to share
+                    once, encrypt the text in your browser so it never touches a remote server.</li>
+                <li><strong>Teach or learn about modern encryption.</strong> Use this tool in class or self-study to see
+                    how password-based text encryption behaves in practice.</li>
+                <li><strong>Create QR code puzzles or hidden messages.</strong> Turn encrypted text into QR codes for
+                    games, classroom exercises, or scavenger hunts.</li>
+            </ul>
+        </div>
+
+        <section class="faq-section">
+            <h2>FAQ – encrypting and decrypting text online</h2>
+
+            <div class="faq-item">
+                <h3>How do I use this online text encrypter?</h3>
+                <p>To encrypt and decrypt text online with this tool:</p>
+                <ol>
+                    <li>Type or paste your message into the <strong>Input Text</strong> box.</li>
+                    <li>Enter a <strong>Password</strong> that you will remember.</li>
+                    <li>Click <strong>Encrypt</strong> to generate an encrypted string. You can copy this string or turn
+                        it into a QR code.</li>
+                    <li>To decrypt, paste the encrypted text back into the Input box, enter the same password, and click
+                        <strong>Decrypt</strong> to recover the original message.
+                    </li>
+                </ol>
+                <p>All encryption and decryption steps happen locally in your browser.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Is this online text encrypter secure?</h3>
+                <p>The tool uses modern browser cryptography to encrypt and decrypt text online with a password. All
+                    operations run client-side in your browser, so your text and password are not sent to a server. For
+                    short messages and everyday use, this provides a strong level of protection. However, it is not a
+                    substitute for audited end-to-end encrypted messaging apps, password managers, or hardware wallets.
+                </p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Does my text ever leave my browser or get stored on a server?</h3>
+                <p>No. The encryption and decryption happen entirely in your browser. Your text, password, and encrypted
+                    output are not uploaded to our servers or to any third-party service. We may use anonymous analytics
+                    to understand overall traffic, but the actual content you encrypt or decrypt is never logged.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Why does the encrypted text change every time with the same input and password?</h3>
+                <p>This is expected behavior for a secure online text encrypter. Each time you click “Encrypt”, the tool
+                    generates fresh random values (a salt and an initialization vector). These values are combined with
+                    your password to derive the encryption key and to run the encryption algorithm. Because the random
+                    data is different every time, the encrypted text also looks different — even when the original
+                    message and password are the same. This randomness improves security and does not affect your
+                    ability to decrypt later.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Can I use this tool to encrypt very large amounts of text?</h3>
+                <p>Technically, modern browsers can handle relatively large text buffers, but this tool is designed for
+                    small to medium-sized text, such as messages, notes, or short snippets. Very large inputs can make
+                    your browser slow or unresponsive, and QR codes can become too dense to scan. For best performance,
+                    keep your text under roughly 1 MB and use specialized tools for large files or backups.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>What happens if I forget my password? Can you recover my data?</h3>
+                <p>If you forget the password, the encrypted text cannot be recovered. There is no backdoor and we do
+                    not store a copy of your password or your plaintext. This is a core property of password-based
+                    encryption: only someone who knows the password can decrypt the data. Always choose a password you
+                    can safely store and remember, or use a password manager.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Can I use this website to encrypt and decrypt text online on my phone?</h3>
+                <p>Yes. As long as your mobile browser supports modern web standards and the Web Crypto API, you can
+                    encrypt and decrypt text online on your phone in the same way as on a desktop. Recent versions of
+                    Chrome, Safari, Edge, and Firefox on mobile devices should work. Older or in-app browsers may not
+                    fully support the crypto features.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Can I share encrypted text via email or chat? Is it safe?</h3>
+                <p>Yes. A common use case is to encrypt text online, copy the encrypted string, and share it via email,
+                    chat, or any other app. The recipient then pastes that string into Encrypter.site and enters the
+                    same password to decrypt it. This protects the message content, but you should still share the
+                    password through a separate, trusted channel and be aware that anyone who knows the password and
+                    sees the ciphertext can read the message.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>What is the QR code feature for?</h3>
+                <p>The QR code feature lets you turn the encrypted text into a scannable image. This is useful for
+                    sharing encrypted messages in printed form, on screens, or in games and classroom exercises. Someone
+                    can scan the QR code, visit Encrypter.site, and use “Decrypt from QR Code” together with the correct
+                    password to reveal the original text.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Does the QR code contain my password?</h3>
+                <p>No. The QR code only encodes the encrypted text, not your password. To decrypt the message, a user
+                    still needs to enter the correct password manually. This ensures that the password never appears
+                    inside the QR image and is not stored in the encoded data.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Why does decryption sometimes fail?</h3>
+                <p>Decryption can fail for several reasons:</p>
+                <ul>
+                    <li>The password is incorrect or slightly different from the one used during encryption.</li>
+                    <li>The encrypted text was truncated, changed, or pasted incorrectly.</li>
+                    <li>The QR code image was cropped, compressed, or decoded with errors.</li>
+                    <li>The text was not originally encrypted by this tool or has an incompatible format.</li>
+                </ul>
+                <p>If decryption fails, double-check the password, make sure the encrypted string is complete, and
+                    verify that it came from Encrypter.site.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Is this tool free to use? Are there any limits?</h3>
+                <p>Yes. This is a free online text encrypter and decryptor. There are no accounts, subscriptions, or
+                    artificial rate limits on how many times you can encrypt or decrypt text. The practical limits come
+                    from your device and browser performance — very large inputs may be slow or unstable.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Can I self-host this page or run it offline?</h3>
+                <p>Because everything runs client-side, you can technically save the page and its JavaScript files and
+                    run the tool offline or on your own server if you know what you are doing. However, you are then
+                    responsible for hosting, updates, and security. For most users, simply using Encrypter.site over
+                    HTTPS is the easiest and safest option.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Can two people use different browsers or devices and still decrypt the same ciphertext?</h3>
+                <p>Yes. As long as the ciphertext was generated by this tool and the other person uses the same tool and
+                    password, they can decrypt it in any modern browser — on desktop or mobile. The encrypted text
+                    encodes all the technical parameters needed for decryption, so it does not matter which device or
+                    operating system is used.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Does this online text encrypter log any of my activity?</h3>
+                <p>We do not log or store the plaintext, password, or encrypted text that you enter when you encrypt or
+                    decrypt text online. Basic anonymous analytics may be used to understand overall traffic and improve
+                    the site, but the actual content you process with the tool is never recorded on our servers.</p>
+            </div>
+        </section>
+
+        <section class="security-section">
+            <h2>Security &amp; privacy disclaimer</h2>
+            <p>
+                This online text encrypter is a general-purpose tool for small pieces of text. All encryption and
+                decryption happen <strong>locally in your browser</strong> using modern client-side cryptography. Your
+                text, password,
+                and encrypted data are not uploaded to our servers.
+            </p>
+            <p>
+                That said, this tool is <strong>not</strong> a replacement for audited end-to-end encrypted messaging
+                apps, password managers, or hardware wallets. Avoid using it as your only protection for highly
+                sensitive, long-term secrets such as bank logins, cryptocurrency seed phrases, or full database backups.
+            </p>
+            <p>
+                Use Encrypter.site for short messages, notes, experiments, and educational purposes — and always keep
+                your password safe.
+            </p>
+        </section>
+    </div>
+
+
+    <script src="js/main.js"></script>
+
+</body>
+
+</html>

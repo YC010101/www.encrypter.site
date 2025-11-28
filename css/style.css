@@ -1,0 +1,989 @@
+:root {
+    --bg-color: #0f172a;
+    --card-bg: #1e293b;
+    --text-primary: #f1f5f9;
+    /* Slightly brighter white */
+    --text-secondary: #94a3b8;
+    --accent-color: #3b82f6;
+    --accent-hover: #2563eb;
+    --error-color: #ef4444;
+    --success-color: #22c55e;
+    --border-color: #334155;
+    --input-bg: #020617;
+    --ring-color: rgba(59, 130, 246, 0.5);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 1rem;
+    -webkit-font-smoothing: antialiased;
+    /* Smoother fonts */
+}
+
+.container {
+    width: 100%;
+    max-width: 800px;
+    background-color: var(--card-bg);
+    border-radius: 1rem;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+    /* Deeper shadow */
+    padding: 2.5rem;
+    /* More padding */
+    border: 1px solid var(--border-color);
+}
+
+/* Navigation */
+.top-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 1.5rem;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.site-name {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -0.025em;
+}
+
+.nav-tabs {
+    display: flex;
+    gap: 0.25rem;
+    background-color: var(--input-bg);
+    padding: 0.25rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--border-color);
+}
+
+.nav-tab {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    padding: 0.4rem 1rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 0.375rem;
+    transition: all 0.2s;
+}
+
+.nav-tab:hover {
+    color: var(--text-primary);
+}
+
+.nav-tab.active {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 2rem;
+    /* Removed border-bottom from here as it's now on nav or not needed */
+    padding-bottom: 0;
+}
+
+h1 {
+    font-size: 2rem;
+    /* Larger title */
+    font-weight: 800;
+    /* Bolder */
+    background: linear-gradient(to right, #60a5fa, #a78bfa);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.025em;
+    /* Modern tight spacing */
+}
+
+.subtitle {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    /* Slightly larger */
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.section {
+    margin-bottom: 2rem;
+    /* More breathing room */
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+textarea,
+input[type="password"],
+input[type="number"],
+input[type="text"] {
+    width: 100%;
+    padding: 0.875rem;
+    /* More comfortable padding */
+    background-color: var(--input-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    color: var(--text-primary);
+    font-family: monospace;
+    font-size: 0.95rem;
+    transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
+}
+
+textarea:focus,
+input[type="password"]:focus,
+input[type="number"]:focus,
+input[type="text"]:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 4px var(--ring-color);
+    /* Nice focus ring */
+    background-color: rgba(2, 6, 23, 0.8);
+}
+
+textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.controls {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.input-row {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+    align-items: flex-start;
+}
+
+.input-group {
+    flex: 1;
+}
+
+.input-row+.help-text {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+}
+
+button {
+    flex: 1;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.1s, opacity 0.2s, background-color 0.2s;
+    font-size: 1rem;
+    min-width: 120px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+button:active {
+    transform: scale(0.98);
+    /* Satisfying click effect */
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btn-encrypt {
+    background-color: var(--card-bg);
+    border: 1px solid var(--accent-color);
+    color: var(--accent-color);
+}
+
+.btn-encrypt:hover:not(:disabled) {
+    background-color: var(--accent-hover);
+}
+
+.btn-decrypt {
+    background-color: var(--card-bg);
+    border: 1px solid var(--accent-color);
+    color: var(--accent-color);
+}
+
+.btn-decrypt:hover:not(:disabled) {
+    background-color: rgba(59, 130, 246, 0.1);
+}
+
+.btn-copy {
+    background-color: var(--border-color);
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    padding: 0.5rem 1rem;
+    margin-top: 0.5rem;
+    width: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn-copy:hover {
+    background-color: #475569;
+    color: white;
+}
+
+.output-container {
+    position: relative;
+}
+
+.qr-status {
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+}
+
+.qr-file-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.qr-file-name {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    word-break: break-all;
+}
+
+#qr-input-file {
+    display: none;
+}
+
+.status-message {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    min-height: 1.5rem;
+    text-align: center;
+}
+
+.error {
+    color: var(--error-color);
+}
+
+.success {
+    color: var(--success-color);
+}
+
+.info-section {
+    margin-top: 4rem;
+    padding-top: 3rem;
+    border-top: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+.info-section h2 {
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    margin-top: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+}
+
+.info-section ul {
+    padding-left: 1.5rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.7;
+}
+
+.info-section li {
+    margin-bottom: 0.75rem;
+}
+
+.disclaimer {
+    background-color: rgba(245, 158, 11, 0.1);
+    /* Amber tint */
+    border: 1px solid rgba(245, 158, 11, 0.2);
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+    margin-top: 3rem;
+}
+
+.disclaimer h3 {
+    color: #fbbf24;
+    /* Amber-400 */
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.disclaimer p {
+    font-size: 0.9rem;
+    color: #cbd5e1;
+}
+
+.disclaimer strong {
+    color: #fbbf24;
+}
+
+/* Advanced Options Toggle */
+.advanced-toggle {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    cursor: pointer;
+    padding: 0.4rem 0.8rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+    display: inline-flex;
+    width: auto;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.advanced-toggle:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+}
+
+.advanced-options {
+    display: none;
+    padding: 1rem;
+    background-color: var(--input-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.advanced-options.show {
+    display: block;
+}
+
+.advanced-group {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.advanced-group input {
+    width: 120px;
+    padding: 0.5rem;
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 1.5rem;
+    }
+
+    .controls {
+        flex-direction: column;
+    }
+
+    button {
+        width: 100%;
+    }
+}
+
+/* QR Mode Styles */
+#qrMode {
+    display: none;
+}
+
+.back-btn {
+    background: none;
+    border: none;
+    color: var(--accent-color);
+    cursor: pointer;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.back-btn:hover {
+    text-decoration: underline;
+}
+
+/* Refined UI Layout */
+.top-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    /* Left/Right alignment for clear and QR buttons */
+    gap: 0.75rem;
+}
+
+
+.qr-entry-button {
+    width: auto;
+    /* Prevent full width */
+    flex: 0 0 auto;
+    /* Prevent flex growth */
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+    background-color: var(--card-bg);
+    border: 1px dashed var(--accent-color);
+    color: var(--accent-color);
+    border-radius: 0.5rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: background-color 0.2s;
+}
+
+.qr-entry-button:hover {
+    background-color: rgba(59, 130, 246, 0.1);
+}
+
+.qr-entry-button:active {
+    transform: scale(0.98);
+}
+
+.output-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    width: 100%;
+}
+
+.output-action-button {
+    width: auto;
+    min-width: 140px;
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+    background-color: var(--border-color);
+    color: var(--text-secondary);
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.output-action-button:hover {
+    background-color: #475569;
+    color: white;
+}
+
+.output-action-button:active {
+    transform: scale(0.98);
+}
+
+/* Specific layout adjustments */
+.output-actions .primary-copy {
+    flex: 2;
+}
+
+.output-actions .secondary-qrcode,
+.output-actions .secondary-link {
+    flex: 1;
+    min-width: 0; /* Allow shrinking if needed, but flex: 1 should handle it */
+}
+
+/* QR Select Section Redesign */
+.qr-select-card {
+    background-color: transparent;
+    border: none;
+    /* Removed border-radius as it's not needed without background/border */
+    padding: 2rem 0;
+    /* Adjusted padding to be vertical only if needed, or keep it */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    text-align: center;
+}
+
+.qr-choose-button {
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.qr-choose-button:hover {
+    background-color: #2563eb;
+    transform: translateY(-1px);
+}
+
+.qr-choose-button:active {
+    transform: scale(0.98);
+}
+
+.qr-file-info-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.qr-file-name-pill {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+    border-radius: 9999px;
+    padding: 0.25rem 1rem;
+    font-size: 0.85rem;
+    color: var(--text-primary);
+    max-width: 80%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.qr-status-text {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-top: 0.5rem;
+    line-height: 1.4;
+}
+
+.help-text {
+    margin-top: 0.35rem;
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    line-height: 1.4;
+}
+
+#btn-download-qr {
+    margin: 1rem auto 0 auto;
+    min-width: 180px;
+    display: none;
+}
+
+.input-error {
+    border-color: var(--error-color) !important;
+    box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.35) !important;
+}
+
+#qr-section {
+    margin-top: 1.5rem;
+    display: none;
+    text-align: center;
+    border: 1px dashed var(--border-color);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    background-color: rgba(255, 255, 255, 0.02);
+}
+
+#qr-code-container {
+    background: white;
+    padding: 1rem;
+    display: inline-block;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.icon {
+    width: 16px;
+    height: 16px;
+    fill: none;
+    stroke: currentColor;
+    display: inline-block;
+}
+
+.icon-20 {
+    width: 20px;
+    height: 20px;
+}
+
+.icon path {
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 2;
+}
+
+#unsupported-warning {
+    display: none;
+    background-color: #ef4444;
+    color: white;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.label-compact {
+    margin-bottom: 0;
+}
+
+.advanced-help {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-top: 0.5rem;
+}
+
+.column-stack {
+    display: flex;
+    flex-direction: column;
+    margin-top: 0.5rem;
+    gap: 0.5rem;
+}
+
+.qr-meta {
+    margin-top: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.qr-or {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+}
+
+.help-text-tight {
+    margin: 0;
+}
+
+.qr-title {
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.qr-subtitle {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+}
+
+.textarea-subtle {
+    background-color: rgba(255, 255, 255, 0.03);
+}
+
+.btn-qr-decrypt {
+    background-color: var(--accent-color);
+    color: white;
+    width: 100%;
+}
+
+.qr-footnote {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    text-align: center;
+    margin-top: 2rem;
+}
+
+/* Password Toggle Styles */
+.password-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.password-container input[type="password"],
+.password-container input[type="text"] {
+    padding-right: 40px; /* Make room for the eye icon */
+}
+
+.password-toggle {
+    position: absolute;
+    right: 10px;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: auto; /* Override default button min-width */
+    width: 24px;
+    height: 24px;
+    transition: color 0.2s;
+}
+
+.password-toggle:hover {
+    color: var(--accent-color);
+    background: none; /* Override default button hover background */
+}
+
+.password-toggle:active {
+    transform: scale(0.95);
+}
+
+.password-toggle .icon {
+    width: 20px;
+    height: 20px;
+}
+
+/* URL Notice Styles */
+.url-notice {
+    margin-top: 0.5rem;
+    padding: 0.75rem;
+    background-color: rgba(59, 130, 246, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    border-radius: 0.5rem;
+    color: #60a5fa;
+    font-size: 0.875rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.url-notice::before {
+    content: "ℹ";
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.25rem;
+    height: 1.25rem;
+    background-color: rgba(59, 130, 246, 0.2);
+    border-radius: 50%;
+    font-size: 0.75rem;
+    font-weight: bold;
+}
+
+/* Clear Button Styles */
+.label-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.label-row label {
+    margin-bottom: 0; /* Override default label margin */
+}
+
+.btn-clear {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    cursor: pointer;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    transition: all 0.2s;
+}
+
+.btn-clear:hover {
+    color: var(--error-color);
+    background-color: rgba(239, 68, 68, 0.1);
+}
+
+/* Clear Screen Button Styles */
+.top-actions {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.btn-clear-screen {
+    width:auto;
+    flex: 0 0 auto;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+    background-color: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    border-radius: 0.5rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s;
+}
+
+.btn-clear-screen:hover {
+    background-color: rgba(239, 68, 68, 0.1);
+    color: var(--error-color);
+    border-color: var(--error-color);
+}
+
+.btn-clear-screen:active {
+    transform: scale(0.98);
+}
+
+.btn-clear-screen .icon {
+    width: 16px;
+    height: 16px;
+}
+
+.btn-invisible-spacer {
+    display: none;
+}
+
+.qr-entry-button {
+    flex: 0 0 auto;
+}
+
+/* Center Labels */
+/* Center Labels */
+.section > label[for="encrypt-input"],
+.section > label[for="decrypt-input"],
+.section > label[for="encrypt-password"],
+.section > label[for="decrypt-password"],
+.output-container > label[for="encrypt-output"],
+.output-container > label[for="decrypt-output"],
+.section > label[for="qrCiphertext"],
+.input-group > label[for="qrPassword"],
+.input-group > label[for="qrIterationsInput"],
+.output-container > label[for="qrPlaintextOutput"] {
+    text-align: center;
+    display: block;
+    width: 100%;
+}
+
+/* FAQ and Security Sections */
+.faq-section {
+    margin-top: 4rem;
+    padding-top: 3rem;
+    border-top: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+.security-section {
+    margin-top: 4rem;
+    background-color: rgba(245, 158, 11, 0.1); /* Amber tint */
+    border: 1px solid rgba(245, 158, 11, 0.2);
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+}
+
+.faq-section h2 {
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+}
+
+.security-section h2 {
+    color: #fbbf24; /* Amber-400 */
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+}
+
+.security-section p {
+    font-size: 0.9rem;
+    color: #cbd5e1;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.security-section strong {
+    color: #fbbf24;
+}
+
+.faq-item {
+    margin-bottom: 2.5rem;
+}
+
+.faq-item h3 {
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.faq-item p,
+.faq-item ul,
+.faq-item ol {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.faq-item ul,
+.faq-item ol {
+    padding-left: 1.5rem;
+}
+
+.faq-item li {
+    margin-bottom: 0.5rem;
+}
+
+.security-section p {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+/* Header Layout */
+/* Header Layout */
+.site-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+/* Nav Brand */
+.nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.site-logo-nav {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.site-logo-nav img {
+    height: 32px;
+    width: auto;
+    transition: transform 0.2s ease;
+}
+
+.site-logo-nav:hover img {
+    transform: scale(1.05);
+}
+
+/* Responsive Header */
+@media (max-width: 600px) {
+    .top-nav {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+    }
+    
+    .nav-brand {
+        width: 100%;
+        justify-content: center;
+    }
+}
