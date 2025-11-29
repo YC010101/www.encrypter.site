@@ -182,6 +182,7 @@ textarea {
 
 .input-group {
     flex: 1;
+    text-align: center;
 }
 
 .input-row+.help-text {
@@ -504,7 +505,7 @@ button:disabled {
 
 /* Specific layout adjustments */
 .output-actions .primary-copy {
-    flex: 2;
+    flex: 1;
 }
 
 .output-actions .secondary-qrcode,

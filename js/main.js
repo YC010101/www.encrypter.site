@@ -523,7 +523,7 @@
         // --- Clear Screen Logic ---
 
         function clearEncryptView() {
-            if (!confirm("Are you sure you want to clear the screen?")) return;
+            if (!confirm("This will clear all current content. Continue?")) return;
             encryptInput.value = '';
             encryptPassword.value = '';
             encryptOutput.value = '';
@@ -534,7 +534,7 @@
         }
 
         function clearDecryptView() {
-            if (!confirm("Are you sure you want to clear the screen?")) return;
+            if (!confirm("This will clear all current content. Continue?")) return;
             decryptInput.value = '';
             decryptPassword.value = '';
             decryptOutput.value = '';
