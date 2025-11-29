@@ -504,14 +504,11 @@ button:disabled {
 }
 
 /* Specific layout adjustments */
-.output-actions .primary-copy {
-    flex: 1;
-}
-
+.output-actions .primary-copy,
 .output-actions .secondary-qrcode,
 .output-actions .secondary-link {
     flex: 1;
-    min-width: 0; /* Allow shrinking if needed, but flex: 1 should handle it */
+    min-width: 0; /* Ensure all buttons can shrink equally */
 }
 
 /* QR Select Section Redesign */
