@@ -446,9 +446,10 @@ button:disabled {
 
 .qr-entry-button {
     width: auto;
-    /* Prevent full width */
-    flex: 0 0 auto;
-    /* Prevent flex growth */
+    /* Allow proportional shrinking */
+    flex: 1;
+    min-width: 0;
+    justify-content: center;
     padding: 0.4rem 0.8rem;
     font-size: 0.85rem;
     background-color: var(--card-bg);
@@ -460,6 +461,11 @@ button:disabled {
     align-items: center;
     gap: 0.5rem;
     transition: background-color 0.2s;
+    /* Allow text wrapping */
+    white-space: normal;
+    height: auto;
+    text-align: center;
+    line-height: 1.2;
 }
 
 .qr-entry-button:hover {
@@ -808,12 +814,14 @@ button:disabled {
     align-items: center;
     margin-bottom: 1rem;
     gap: 1rem;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; Removed to prevent wrapping */
 }
 
 .btn-clear-screen {
     width:auto;
-    flex: 0 0 auto;
+    flex: 1;
+    min-width: 0;
+    justify-content: center;
     padding: 0.4rem 0.8rem;
     font-size: 0.85rem;
     background-color: transparent;
@@ -825,6 +833,11 @@ button:disabled {
     align-items: center;
     gap: 0.5rem;
     transition: all 0.2s;
+    /* Allow text wrapping */
+    white-space: normal;
+    height: auto;
+    text-align: center;
+    line-height: 1.2;
 }
 
 .btn-clear-screen:hover {
@@ -842,13 +855,9 @@ button:disabled {
     height: 16px;
 }
 
-.btn-invisible-spacer {
-    display: none;
-}
 
-.qr-entry-button {
-    flex: 0 0 auto;
-}
+
+
 
 /* Center Labels */
 /* Center Labels */
